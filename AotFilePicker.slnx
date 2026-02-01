@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/SolutionItems/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="LICENSE.md" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/AotDialogs/AotDialogs.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/TestPicker/TestPicker.csproj" />
+  </Folder>
+</Solution>
