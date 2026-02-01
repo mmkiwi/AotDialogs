@@ -7,4 +7,23 @@
     <IsAotCompatible>true</IsAotCompatible>
     <NoWarn>CS3016</NoWarn> <!-- CLS Compliance issue from COM Generation, only affects internal classes -->
   </PropertyGroup>
+
+
+  <PropertyGroup>
+    <PackageId>MMKiwi.AotDialogs</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Micah Makaiwi</Authors>
+    <Description>
+      This is a simple package for .NET (8.0 or later) that allows for simple dialogs (for instance from command line or
+      macro) programs. This package is AOT-safe and less than 200kb trimmed.
+    </Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/mmkiwi/AotDialogs</RepositoryUrl>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+  
 </Project>
