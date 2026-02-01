@@ -13,6 +13,8 @@
     <PackageId>MMKiwi.AotDialogs</PackageId>
     <Version>0.1.0</Version>
     <Authors>Micah Makaiwi</Authors>
+    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
     <Description>
       This is a simple package for .NET (8.0 or later) that allows for simple dialogs (for instance from command line or
       macro) programs. This package is AOT-safe and less than 200kb trimmed.
