@@ -6,6 +6,7 @@
 
 using System.Runtime.CompilerServices;
 
+using MMKiwi.AotDialogs.Gtk;
 using MMKiwi.AotDialogs.WindowsCom;
 
 namespace MMKiwi.AotDialogs;
@@ -16,6 +17,12 @@ public class AotDialogFactory
     {
         if (OperatingSystem.IsWindowsVersionAtLeast(6, 0, 6000))
             return new WindowsComFilePicker();
+        if (OperatingSystem.IsLinux())
+        {
+            if (GtkDialogs.TryLoad() is { } gtkDialogs)
+                return gtkDialogs;
+            throw new NotSupportedException("Could not find GTK library.");
+        }
         throw new NotSupportedException($"Operating System Not Supported: {Environment.OSVersion}");
     });
 

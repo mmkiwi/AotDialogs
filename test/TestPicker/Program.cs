@@ -1,15 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using MMKiwi.AotDialogs;
+using System.Runtime.InteropServices;
 
-internal class Program
+using MMKiwi.AotDialogs;
+using MMKiwi.AotDialogs.Gtk;
+
+internal partial class Program
 {
     [STAThread]
     public static async Task Main(string[] args)
     {
         var instance = AotDialogFactory.Instance;
-        await TestAsync(instance);
         TestSync(instance);
+        await TestAsync(instance);
     }
 
     private static async Task TestAsync(INativeDialog instance)
@@ -89,4 +92,7 @@ internal class Program
             Title = "BrowseForSaveFile", Message = browseForSaveFile,
         }));
     }
+    
+    [LibraryImport("kernel32.dll", StringMarshalling =  StringMarshalling.Utf16)]
+    private static partial nuint AddDllDirectory(string newDirectory);
 }
