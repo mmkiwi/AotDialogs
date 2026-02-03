@@ -1,5 +1,6 @@
-namespace MMKiwi.AotDialogs.WindownCom;
+namespace MMKiwi.AotDialogs.WindowsCom;
 
+#if FALSE
 [Guid("04B0F1A7-9490-44BC-96E1-4296A31252E2"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
  GeneratedComInterface()]
 [SupportedOSPlatform("windows6.0.6000")]
@@ -338,3 +339,4 @@ internal partial interface IFileOperationProgressSink
     /// <remarks>This method should return S_OK rather than E_NOTIMPL.</remarks>
     void ResumeTimer();
 }
+#endif

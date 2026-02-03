@@ -1,6 +1,6 @@
-using MMKiwi.AotDialogs.WindownCom;
+using MMKiwi.AotDialogs.WindowsCom;
 
-namespace MMKiwi.AotDialogs;
+namespace MMKiwi.AotDialogs.WindowsCom;
 
 [SupportedOSPlatform("windows6.0.6000")]
 internal class WindowsComFilePicker : INativeDialog

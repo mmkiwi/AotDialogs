@@ -1,4 +1,4 @@
-﻿namespace MMKiwi.AotDialogs.WindownCom;
+﻿namespace MMKiwi.AotDialogs.WindowsCom;
 
 [Guid("B4DB1657-70D7-485E-8E3E-6FCB5A5C1802")]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]

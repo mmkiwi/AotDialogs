@@ -1,4 +1,4 @@
-namespace MMKiwi.AotDialogs.WindownCom;
+namespace MMKiwi.AotDialogs.WindowsCom;
 
 [SupportedOSPlatform("windows6.0.6000")]
 static class NativeEnums

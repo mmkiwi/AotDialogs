@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace MMKiwi.AotDialogs.WindownCom;
+namespace MMKiwi.AotDialogs.WindowsCom;
 
 
 internal partial class NativeMethods

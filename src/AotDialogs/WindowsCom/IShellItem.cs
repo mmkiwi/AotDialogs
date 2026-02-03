@@ -1,4 +1,4 @@
-namespace MMKiwi.AotDialogs.WindownCom;
+namespace MMKiwi.AotDialogs.WindowsCom;
 
 internal static class ShellItemExtensions
 {

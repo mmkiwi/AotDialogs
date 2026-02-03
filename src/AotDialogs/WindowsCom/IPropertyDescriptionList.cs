@@ -1,5 +1,6 @@
-namespace MMKiwi.AotDialogs.WindownCom;
+namespace MMKiwi.AotDialogs.WindowsCom;
 
+#if FALSE
 [Guid("1F9FC1D0-C39B-4B26-817F-011967D3440E")]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 [GeneratedComInterface]
@@ -38,3 +39,4 @@ internal unsafe partial interface IPropertyDescriptionList
     /// <remarks>It is recommended that you use the IID_PPV_ARGS macro, defined in objbase.h, to package the <i>riid</i> and <i>ppv</i> parameters. This macro provides the correct IID based on the interface pointed to by the value in <i>ppv</i>, eliminating the possibility of a coding error.</remarks>
     void GetAt(uint iElem, global::System.Guid* riid, [MarshalAs(UnmanagedType.Interface)] out object ppv);
 }
+#endif

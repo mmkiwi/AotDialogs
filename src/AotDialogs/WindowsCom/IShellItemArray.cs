@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices.Marshalling;
 using System.Runtime.Versioning;
 
-namespace MMKiwi.AotDialogs.WindownCom;
+namespace MMKiwi.AotDialogs.WindowsCom;
 
 [Guid("B63EA76D-1F85-456F-A19C-48159EFA858B")]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]

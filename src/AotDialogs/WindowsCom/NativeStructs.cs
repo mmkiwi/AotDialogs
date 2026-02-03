@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace MMKiwi.AotDialogs.WindownCom;
+namespace MMKiwi.AotDialogs.WindowsCom;
 
 [SupportedOSPlatform("windows6.0.6000")]
 public static class NativeStructs

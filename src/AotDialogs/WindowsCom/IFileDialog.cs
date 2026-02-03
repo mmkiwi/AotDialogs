@@ -1,4 +1,4 @@
-namespace MMKiwi.AotDialogs.WindownCom;
+namespace MMKiwi.AotDialogs.WindowsCom;
 
 [Guid("42F85136-DB7E-439C-85F1-E4075D135FC8")]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
@@ -62,7 +62,7 @@ internal partial interface IFileDialog : IModalWindow
     /// <remarks>
     /// <para><see href="https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-ifiledialog-advise">Learn more about this API from learn.microsoft.com</see>.</para>
     /// </remarks>
-    void Advise(IFileDialogEvents pfde, out uint pdwCookie);
+    void Advise(nint /*IFileDialogEvents*/ pfde, out uint pdwCookie);
 
     /// <summary>Removes an event handler that was attached through the IFileDialog::Advise method.</summary>
     /// <param name="dwCookie">
