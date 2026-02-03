@@ -1,4 +1,4 @@
-using MMKiwi.AotDialogs.Win32;
+using MMKiwi.AotDialogs.WindownCom;
 
 namespace MMKiwi.AotDialogs;
 
