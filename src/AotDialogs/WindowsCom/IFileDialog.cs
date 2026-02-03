@@ -1,3 +1,9 @@
+// SPDX-License-Identifier: MIT
+// Copyright 2026 Micah Makaiwi
+// This source code is subject to the terms of the MIT license.
+// If a copy of the license was not distributed with this file,
+// you can obtain one at https://github.com/mmkiwi/AotDialogs/blob/main/LICENSE.md
+
 namespace MMKiwi.AotDialogs.WindowsCom;
 
 [Guid("42F85136-DB7E-439C-85F1-E4075D135FC8")]
@@ -244,7 +250,7 @@ internal partial interface IFileDialog : IModalWindow
     /// <para>Type: <b>HRESULT</b> If this method succeeds, it returns <b>S_OK</b>. Otherwise, it returns an <b>HRESULT</b> error code.</para>
     /// </returns>
     /// <remarks><a href="https://docs.microsoft.com/windows/desktop/api/shobjidl_core/nf-shobjidl_core-shsettemporarypropertyforitem">SHSetTemporaryPropertyForItem</a> can be used to set a temporary <a href="https://docs.microsoft.com/windows/desktop/properties/props-system-itemnamedisplay">PKEY_ItemNameDisplay</a> property on the item represented by the <i>psi</i> parameter. The value for this property will be used in place of the item's UI name.</remarks>
-    void AddPlace(IShellItem psi, NativeEnums.FDAP fdap);
+    void AddPlace(IShellItem psi, int /* NativeEnums.FDAP */ fdap);
 
     /// <summary>Sets the default extension to be added to file names.</summary>
     /// <param name="pszDefaultExtension">

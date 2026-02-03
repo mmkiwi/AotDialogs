@@ -1,6 +1,14 @@
-namespace MMKiwi.AotDialogs.WindowsCom;
+// SPDX-License-Identifier: MIT
+// Copyright 2026 Micah Makaiwi
+// This source code is subject to the terms of the MIT license.
+// If a copy of the license was not distributed with this file,
+// you can obtain one at https://github.com/mmkiwi/AotDialogs/blob/main/LICENSE.md
+
+// This interface is unused; removing it from the compilation, but keeping the file in case it's useful later.
 
 #if FALSE
+namespace MMKiwi.AotDialogs.WindowsCom;
+
 [Guid("04B0F1A7-9490-44BC-96E1-4296A31252E2"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
  GeneratedComInterface()]
 [SupportedOSPlatform("windows6.0.6000")]

@@ -1,3 +1,9 @@
+// SPDX-License-Identifier: MIT
+// Copyright 2026 Micah Makaiwi
+// This source code is subject to the terms of the MIT license.
+// If a copy of the license was not distributed with this file,
+// you can obtain one at https://github.com/mmkiwi/AotDialogs/blob/main/LICENSE.md
+
 namespace MMKiwi.AotDialogs.WindowsCom;
 
 internal static class ShellItemExtensions
@@ -85,7 +91,7 @@ internal partial interface IShellItem
     /// <remarks>
     /// <para><see href="https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-ishellitem-getattributes">Learn more about this API from learn.microsoft.com</see>.</para>
     /// </remarks>
-    void GetAttributes(NativeEnums.SFGAO_FLAGS sfgaoMask, out NativeEnums.SFGAO_FLAGS psfgaoAttribs);
+    void GetAttributes(int /* NativeEnums.SFGAO_FLAGS */ sfgaoMask, out int /* NativeEnums.SFGAO_FLAGS */ psfgaoAttribs);
 
     /// <summary>Compares two IShellItem objects.</summary>
     /// <param name="psi">
