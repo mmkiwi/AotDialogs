@@ -19,10 +19,21 @@ internal static partial class NativeMethods
     [LibraryImport("gtk", StringMarshalling =  StringMarshalling.Utf8)]
     public static partial void gtk_widget_destroy (nint widget);
 
-    [LibraryImport("gtk")]
+    [LibraryImport("gtk", StringMarshalling =  StringMarshalling.Utf8)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
-    public static partial GtkFileChooserDialog gtk_file_chooser_dialog_new([MarshalAs(UnmanagedType.LPUTF8Str)] string? title, nint parent,
-        NativeEnums.GtkFileChooserAction action, nint buttons);
+    public static unsafe partial nint gtk_file_chooser_dialog_new(string title, nint parent,
+        NativeEnums.GtkFileChooserAction action, string test, int test1, string test2, int test3, nint ptr);
+    
+    /*
+     * GtkWidget *gtk_file_chooser_dialog_new              (const gchar          *title,
+       GtkWindow            *parent,
+       GtkFileChooserAction  action,
+       const gchar          *first_button_text,
+       ...) G_GNUC_NULL_TERMINATED;
+     */
+    
+    [DllImport("gtk", CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr gtk_file_dialog_new();
     
     [LibraryImport("gtk", StringMarshalling =  StringMarshalling.Utf8)]
     public static partial void gtk_file_chooser_add_filter (GtkFileChooserDialog chooser, GtkFileFilter filter);
