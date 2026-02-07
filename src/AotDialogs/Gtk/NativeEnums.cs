@@ -2,7 +2,7 @@
 
 internal static class NativeEnums
 {
-    public enum GtkFileChooserAction: uint
+    public enum GtkFileChooserAction : uint
     {
         Open = 0,
         Save = 1,
@@ -22,5 +22,12 @@ internal static class NativeEnums
         No = -9,
         Apply = -10,
         Help = -11
+    }
+
+    internal enum ConnectFlags
+    {
+        G_CONNECT_DEFAULT = 0,
+        G_CONNECT_AFTER = 1,
+        G_CONNECT_SWAPPED = 2
     }
 }
