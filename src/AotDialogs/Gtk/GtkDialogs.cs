@@ -12,6 +12,7 @@ public class GtkDialogs : INativeDialog
         nint gtkHandle = 0;
         nint glibHandle = 0;
         nint gobjectHandle = 0;
+        nint giohandle = 0;
         
         NativeLibrary.SetDllImportResolver(Assembly.GetExecutingAssembly(), ResolveGtk);
 
@@ -38,25 +39,34 @@ public class GtkDialogs : INativeDialog
             {
                 if (gtkHandle != 0) return gtkHandle;
                 if (NativeLibrary.TryLoad("gtk", assembly, searchPath ?? DllImportSearchPath.UserDirectories, out gtkHandle)) return gtkHandle;
-                if (NativeLibrary.TryLoad("libgtk-4", assembly, searchPath ?? DllImportSearchPath.UserDirectories, out gtkHandle)) return gtkHandle;
-                if (NativeLibrary.TryLoad("libgtk-3", assembly, searchPath ?? DllImportSearchPath.UserDirectories, out gtkHandle)) return gtkHandle;
+                if (NativeLibrary.TryLoad("gtk-4", assembly, searchPath ?? DllImportSearchPath.UserDirectories, out gtkHandle)) return gtkHandle;
+                if (NativeLibrary.TryLoad("gtk-4.0", assembly, searchPath ?? DllImportSearchPath.UserDirectories, out gtkHandle)) return gtkHandle;
+                if (NativeLibrary.TryLoad("gtk-3", assembly, searchPath ?? DllImportSearchPath.UserDirectories, out gtkHandle)) return gtkHandle;
+                if (NativeLibrary.TryLoad("gtk-3.0", assembly, searchPath ?? DllImportSearchPath.UserDirectories, out gtkHandle)) return gtkHandle;
             }
             if (libraryName == "glib")
             {
                 if (glibHandle != 0) return glibHandle;
                 if (NativeLibrary.TryLoad("glib", out glibHandle)) return glibHandle;
-                if (NativeLibrary.TryLoad("libglib", out glibHandle)) return glibHandle;
-                if (NativeLibrary.TryLoad("libglib-2", out glibHandle)) return glibHandle;
-                if (NativeLibrary.TryLoad("libglib-2.0", out glibHandle)) return glibHandle;
+                if (NativeLibrary.TryLoad("glib-2", out glibHandle)) return glibHandle;
+                if (NativeLibrary.TryLoad("glib-2.0", out glibHandle)) return glibHandle;
             }
             
             if (libraryName == "gobject")
             {
                 if (gobjectHandle != 0) return gobjectHandle;
                 if (NativeLibrary.TryLoad("gobject", out gobjectHandle)) return gobjectHandle;
-                if (NativeLibrary.TryLoad("gobject", out gobjectHandle)) return gobjectHandle;
-                if (NativeLibrary.TryLoad("libgobject-2", out gobjectHandle)) return gobjectHandle;
-                if (NativeLibrary.TryLoad("libgobject-2.0", out gobjectHandle)) return gobjectHandle;
+                if (NativeLibrary.TryLoad("gobject-2", out gobjectHandle)) return gobjectHandle;
+                if (NativeLibrary.TryLoad("gobject-2.0", out gobjectHandle)) return gobjectHandle;
+            }
+            
+            if (libraryName == "gio")
+            {
+                if (giohandle != 0) return giohandle;
+                if (NativeLibrary.TryLoad("gio", out giohandle)) return giohandle;
+                if (NativeLibrary.TryLoad("gio-2", out giohandle)) return giohandle;
+                if (NativeLibrary.TryLoad("gio-2.0", out giohandle)) return giohandle;
+                if (NativeLibrary.TryLoad("libgio-2.0.so", out giohandle)) return giohandle;
             }
             return 0;
         }
@@ -71,7 +81,7 @@ public class GtkDialogs : INativeDialog
     public Version GtkVersion { get; }
     
 
-    public async Task<DialogButton> ShowMessageBoxAsync(MessageBoxSettings settings)
+    public async Task<DialogButton> ShowMessageBoxAsync(MessageBoxSettings settings, CancellationToken token)
     {
         throw new NotImplementedException();
     }
@@ -81,9 +91,21 @@ public class GtkDialogs : INativeDialog
         throw new NotImplementedException();
     }
 
+    private IGtkFileChooserDialog GetDialog(string? title, NativeEnums.GtkFileChooserAction action)
+    {
+        return (this.GtkVersion.Major, this.GtkVersion.Minor) switch
+        {
+            (3, >= 2) => Gtk3FileChooserNative.Create(title, action),
+            (3, _) => Gtk3FileChooserDialog.Create(title, action),
+            (4, > 10) => Gtk4FileDialog.Create(title, action),
+            (4,_) => Gtk4FileChooserNative.Create(title, action),
+            _ => throw new NotImplementedException($"Gtk version {GtkVersion} is not supported")
+        };
+    }
+    
     public string? BrowseForOpenFile(FileOpenSettings settings)
     {
-        var dialog = GtkFileChooserNative.Create(settings.Title, NativeEnums.GtkFileChooserAction.Open);
+        var dialog = GetDialog(settings.Title, NativeEnums.GtkFileChooserAction.Open);
         foreach (var filter in settings.Filters)
         {
             GtkFileFilter gtkFilter = GtkFileFilter.Create();
@@ -104,9 +126,9 @@ public class GtkDialogs : INativeDialog
         return null;
     }
 
-    public async Task<string?> BrowseForOpenFileAsync(FileOpenSettings settings)
+    public async Task<string?> BrowseForOpenFileAsync(FileOpenSettings settings, CancellationToken token)
     { 
-        var dialog = GtkFileChooserNative.Create(settings.Title, NativeEnums.GtkFileChooserAction.Open);
+        var dialog = Gtk3FileChooserNative.Create(settings.Title, NativeEnums.GtkFileChooserAction.Open);
         foreach (var filter in settings.Filters)
         {
             GtkFileFilter gtkFilter = GtkFileFilter.Create();
@@ -119,7 +141,7 @@ public class GtkDialogs : INativeDialog
             dialog.AddFilter(gtkFilter);
         }
         
-        if (await dialog.ShowAsync() == NativeEnums.GtkResponse.Accept)
+        if (await dialog.ShowAsync(token) == NativeEnums.GtkResponse.Accept)
         {
             return dialog.FileName;
         }
@@ -132,7 +154,7 @@ public class GtkDialogs : INativeDialog
         throw new NotImplementedException();
     }
 
-    public Task<string[]> BrowseForOpenFilesAsync(FileOpenSettings settings)
+    public Task<string[]> BrowseForOpenFilesAsync(FileOpenSettings settings, CancellationToken token)
         => Task.Factory.StartNew(() => BrowseForOpenFiles(settings), TaskCreationOptions.LongRunning);
 
     public string? BrowseForOpenFolder(FolderOpenSettings settings)
@@ -140,7 +162,7 @@ public class GtkDialogs : INativeDialog
         throw new NotImplementedException();
     }
 
-    public async Task<string?> BrowseForOpenFolderAsync(FolderOpenSettings settings)
+    public async Task<string?> BrowseForOpenFolderAsync(FolderOpenSettings settings, CancellationToken token)
     {
         throw new NotImplementedException();
     }
@@ -150,7 +172,7 @@ public class GtkDialogs : INativeDialog
         throw new NotImplementedException();
     }
 
-    public async Task<string?> BrowseForSaveFileAsync(FileSaveSettings settings)
+    public async Task<string?> BrowseForSaveFileAsync(FileSaveSettings settings, CancellationToken token)
     {
         throw new NotImplementedException();
     }

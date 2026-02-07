@@ -21,8 +21,8 @@ internal class WindowsComFilePicker : INativeDialog
         return NativeMethods.MessageBoxW(0, settings.Message, settings.Title, flags);
     }
 
-    public Task<DialogButton> ShowMessageBoxAsync(MessageBoxSettings settings)
-        => Task.Factory.StartNew(() => ShowMessageBox(settings));
+    public Task<DialogButton> ShowMessageBoxAsync(MessageBoxSettings settings, CancellationToken token)
+        => Task.Factory.StartNew(() => ShowMessageBox(settings), token);
 
     public string? BrowseForOpenFile(FileOpenSettings settings)
     {
@@ -60,8 +60,8 @@ internal class WindowsComFilePicker : INativeDialog
         return fileName;
     }
 
-    public Task<string?> BrowseForOpenFileAsync(FileOpenSettings settings)
-        => Task.Factory.StartNew(() => BrowseForOpenFile(settings));
+    public Task<string?> BrowseForOpenFileAsync(FileOpenSettings settings, CancellationToken token)
+        => Task.Factory.StartNew(() => BrowseForOpenFile(settings), token);
 
     public string[] BrowseForOpenFiles(FileOpenSettings settings)
     {
@@ -109,8 +109,8 @@ internal class WindowsComFilePicker : INativeDialog
         return results;
     }
 
-    public Task<string[]> BrowseForOpenFilesAsync(FileOpenSettings settings)
-        => Task.Factory.StartNew(() => BrowseForOpenFiles(settings));
+    public Task<string[]> BrowseForOpenFilesAsync(FileOpenSettings settings, CancellationToken token)
+        => Task.Factory.StartNew(() => BrowseForOpenFiles(settings), token);
 
     public string? BrowseForOpenFolder(FolderOpenSettings settings)
     {
@@ -139,8 +139,8 @@ internal class WindowsComFilePicker : INativeDialog
         return fileName;
     }
 
-    public Task<string?> BrowseForOpenFolderAsync(FolderOpenSettings settings)
-        => Task.Factory.StartNew(() => BrowseForOpenFolder(settings));
+    public Task<string?> BrowseForOpenFolderAsync(FolderOpenSettings settings, CancellationToken token)
+        => Task.Factory.StartNew(() => BrowseForOpenFolder(settings), token);
 
     public string? BrowseForSaveFile(FileSaveSettings settings)
     {
@@ -178,6 +178,6 @@ internal class WindowsComFilePicker : INativeDialog
         return fileName;
     }
 
-    public Task<string?> BrowseForSaveFileAsync(FileSaveSettings settings)
-        => Task.Factory.StartNew(() => BrowseForSaveFile(settings));
+    public Task<string?> BrowseForSaveFileAsync(FileSaveSettings settings, CancellationToken token)
+        => Task.Factory.StartNew(() => BrowseForSaveFile(settings), token);
 }

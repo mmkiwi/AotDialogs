@@ -8,18 +8,18 @@ namespace MMKiwi.AotDialogs;
 
 public interface INativeDialog
 {
-    Task<DialogButton> ShowMessageBoxAsync(MessageBoxSettings settings);
+    Task<DialogButton> ShowMessageBoxAsync(MessageBoxSettings settings, CancellationToken token = default);
     DialogButton ShowMessageBox(MessageBoxSettings settings);
 
     string? BrowseForOpenFile(FileOpenSettings settings);
-    Task<string?> BrowseForOpenFileAsync(FileOpenSettings settings);
+    Task<string?> BrowseForOpenFileAsync(FileOpenSettings settings, CancellationToken token = default);
     
     string[] BrowseForOpenFiles(FileOpenSettings settings);
-    Task<string[]> BrowseForOpenFilesAsync(FileOpenSettings settings);
+    Task<string[]> BrowseForOpenFilesAsync(FileOpenSettings settings, CancellationToken token = default);
     
     string? BrowseForOpenFolder(FolderOpenSettings settings);
-    Task<string?> BrowseForOpenFolderAsync(FolderOpenSettings settings);
+    Task<string?> BrowseForOpenFolderAsync(FolderOpenSettings settings, CancellationToken token = default);
     
     string? BrowseForSaveFile(FileSaveSettings settings);
-    Task<string?> BrowseForSaveFileAsync(FileSaveSettings settings);
+    Task<string?> BrowseForSaveFileAsync(FileSaveSettings settings, CancellationToken token = default);
 }
